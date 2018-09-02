@@ -1,0 +1,28 @@
+{
+   "name": "express",
+   "version": "0.0.0",
+   "private": true,
+   "main": "./src/server.js",
+   "scripts": {
+      "start": "node ./src/server.js",
+      "test": "istanbul cover --report cobertura --report lcov node_modules/mocha/bin/_mocha -- -R xunit-file"
+   },
+   "dependencies": {
+      "applicationinsights": "^1.0.4",
+      "body-parser": "^1.18.3",
+      "cookie-parser": "~1.4.3",
+      "debug": "^3.1.0",
+      "express": "^4.16.3",
+      "morgan": "^1.9.0",
+      "pug": "^2.0.3",
+      "serve-favicon": "^2.5.0"
+   },
+   "devDependencies": {
+      "istanbul": "^0.4.5",
+      "mocha": "^3.0.2",
+      "sinon": "^1.17.5",
+      "supertest": "^3.1.0",
+      "sinon-test": "^2.1.3",
+      "xunit-file": "^1.0.0"
+   }
+}
