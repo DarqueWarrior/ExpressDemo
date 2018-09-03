@@ -1,0 +1,40 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: express-qa
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: express-qa
+    spec:
+      containers:
+      - name: express-qa
+        image: mydockerimages-microsoft.azurecr.io/express:latest
+        env:
+        - name: APPINSIGHTS_INSTRUMENTATIONKEY
+          value: "b6a4c40e-f814-4e38-88e8-c40570859834"
+        - name: PORT
+          value: "80"
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+        - name: azurecontainerreg
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: express-qa
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: express-qa
