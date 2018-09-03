@@ -22,7 +22,7 @@ spec:
         - name: APPINSIGHTS_INSTRUMENTATIONKEY
           value: "b6a4c40e-f814-4e38-88e8-c40570859834"
         - name: PORT
-          value: 80
+          value: "80"
         ports:
         - containerPort: 80
       imagePullSecrets:
