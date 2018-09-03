@@ -20,7 +20,7 @@ spec:
         image: mydockerimages-microsoft.azurecr.io/express:latest
         env:
         - name: APPINSIGHTS_INSTRUMENTATIONKEY
-          value: "b6a4c40e-f814-4e38-88e8-c40570859834"
+          value: "9e582685-3b85-46ed-ae1c-a29cf76fd748"
         - name: PORT
           value: "80"
         ports:
