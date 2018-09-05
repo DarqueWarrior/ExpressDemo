@@ -1,0 +1,13 @@
+<testsuite name="Mocha Tests" tests="3" failures="1" errors="1" skipped="0" timestamp="Wed, 05 Sep 2018 22:35:14 GMT" time="0.919">
+<testcase classname="homeController" name="index should return 200" time="0.825"/>
+<testcase classname="homeController" name="about should return 200" time="0.032"><failure>expected 201 &#x22;Created&#x22;, got 200 &#x22;OK&#x22;
+Error: expected 201 &#x22;Created&#x22;, got 200 &#x22;OK&#x22;
+    at Test._assertStatus (node_modules\supertest\lib\test.js:268:12)
+    at Test._assertFunction (node_modules\supertest\lib\test.js:283:11)
+    at Test.assert (node_modules\supertest\lib\test.js:173:18)
+    at Server.assert (node_modules\supertest\lib\test.js:131:12)
+    at emitCloseNT (net.js:1655:8)
+    at _combinedTickCallback (internal/process/next_tick.js:135:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)</failure></testcase>
+<testcase classname="homeController" name="contact should return 200" time="0.032"/>
+</testsuite>
