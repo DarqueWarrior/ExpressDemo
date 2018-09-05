@@ -1,0 +1,218 @@
+resources:
+
+- repo: self
+
+queue:
+
+  name: Hosted Ubuntu 1604
+
+  demands: npm
+
+
+steps:
+
+- task: Npm@0
+
+  displayName: 'npm install bower'
+
+  inputs:
+
+    arguments: 'bower --allow-root'
+
+
+
+
+
+- task: CmdLine@1
+
+  displayName: 'Run bower'
+
+  inputs:
+
+    filename: bower
+
+
+
+    arguments: 'install --allow-root'
+
+
+
+
+
+- task: Npm@0
+
+  displayName: 'npm install for test'
+
+
+
+
+
+- task: Npm@0
+
+  displayName: 'npm test'
+
+  inputs:
+
+    command: test
+
+
+
+    arguments: '-- --grep unit*'
+
+
+
+
+
+- task: PublishTestResults@2
+
+  displayName: 'Publish Test Results'
+
+  inputs:
+
+    testResultsFiles: '**/xunit.xml'
+
+
+
+    testRunTitle: Unit
+
+
+
+    platform: '$(BuildPlatform)'
+
+
+
+    configuration: '$(BuildConfiguration)'
+
+
+
+
+
+- task: PublishCodeCoverageResults@1
+
+  displayName: 'Publish Code Coverage Results'
+
+  inputs:
+
+    codeCoverageTool: Cobertura
+
+
+
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
+
+
+
+    reportDirectory: '$(Build.SourcesDirectory)/coverage/lcov-report'
+
+
+
+
+
+- task: Npm@0
+
+  displayName: 'npm install'
+
+  inputs:
+
+    cwd: src
+
+
+
+
+
+- task: Docker@0
+
+  displayName: 'Build an image'
+
+  inputs:
+
+    containerregistrytype: 'Container Registry'
+
+
+
+    dockerRegistryConnection: mydockerimages
+
+
+
+    dockerFile: src/Dockerfile
+
+
+
+    defaultContext: false
+
+
+
+    context: src
+
+
+
+    imageName: 'mydockerimages-microsoft.azurecr.io/express:$(Build.BuildId)'
+
+
+
+    qualifyImageName: false
+
+
+
+
+
+- task: Docker@0
+
+  displayName: 'Push an image'
+
+  inputs:
+
+    containerregistrytype: 'Container Registry'
+
+
+
+    dockerRegistryConnection: mydockerimages
+
+
+
+    action: 'Push an image'
+
+
+
+    imageName: 'mydockerimages-microsoft.azurecr.io/express:$(Build.BuildId)'
+
+
+
+    qualifyImageName: false
+
+
+
+
+
+- task: CopyFiles@2
+
+  displayName: 'Copy ARM template files to publish folder'
+
+  inputs:
+
+    SourceFolder: templates/
+
+
+
+    Contents: |
+     **/*.json
+     **/*.yaml
+
+
+
+    TargetFolder: '$(Build.StagingDirectory)/pub/templates/'
+
+
+
+    OverWrite: true
+
+
+
+
+
+- task: PublishBuildArtifacts@1
+
+  displayName: 'Publish Artifact: drop'
+
+  inputs:
+
+    PathtoPublish: '$(Build.StagingDirectory)/pub/templates'
