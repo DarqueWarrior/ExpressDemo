@@ -59,7 +59,7 @@ describe('homeController', function () {
 
       request                // Arrange
          .get('/about')      // Act
-         .expect(201, done); // Assert
+         .expect(200, done); // Assert
 
    }));
 
