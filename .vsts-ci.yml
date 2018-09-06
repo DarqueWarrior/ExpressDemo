@@ -39,9 +39,18 @@ steps:
 
 
 
-- task: Npm@0
+steps:
+
+- task: Npm@1
 
   displayName: 'npm install for test'
+
+  inputs:
+
+    verbose: false
+
+
+
 
 
 
