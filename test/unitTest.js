@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const utils = require('../src/utility');
 
-// We'll use this to override require calls in routes
+// We will use this to override require calls in routes
 const proxyquire = require('proxyquire');
 
 // This will create stubbed functions for our overrides
