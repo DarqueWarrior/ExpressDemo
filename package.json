@@ -5,7 +5,7 @@
    "main": "./src/server.js",
    "scripts": {
       "start": "node ./src/server.js",
-      "test": "istanbul cover --report cobertura --report lcov node_modules/mocha/bin/_mocha -- -R xunit-file"
+      "test": "istanbul cover --report cobertura --report lcov node_modules/mocha/bin/_mocha -- -R xunit"
    },
    "dependencies": {
       "applicationinsights": "^1.0.4",
